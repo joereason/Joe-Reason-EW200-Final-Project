@@ -14,24 +14,34 @@ def draw_background(surf):
     cloud.set_colorkey((0,0,0))
     sky.set_colorkey((0,0,0))
 
-    #fill screen
-    skyandclouds = [cloud, sky]
-    for x in range(0, SCREEN_WIDTH, 10):
-        for y in range(0, SCREEN_HEIGHT, 10):
-            #randomize sky and cloud textures
-            num = random.randint(0,1)
-            surf.blit(skyandclouds[num], (x,y))
+    #draw sky
+    for x in range(0, SCREEN_WIDTH, 15):
+        for y in range(0, SCREEN_HEIGHT, 15):
+            surf.blit(sky, (x, y))
 
-    #draw the ground
-    for x in range(0, SCREEN_WIDTH, 10):
-        surf.blit(grass, (x, SCREEN_HEIGHT-2*TILE_SIZE))
+    #draw clouds
+    for x in range(0, SCREEN_WIDTH, 15):
+        for y in range(70, 90, 30):
+            surf.blit(cloud, (x, y))
 
-    for x in range(0, SCREEN_WIDTH, 10):
-        surf.blit(dirt, (x, SCREEN_HEIGHT-TILE_SIZE))
+    #draw the grass
+    for x in range(0, SCREEN_WIDTH, 15):
+        surf.blit(grass, (x, SCREEN_HEIGHT-1.5*TILE_SIZE))
+
+    #draw the dirt from bottom of grass to bottom of screen
+    for x in range(0, SCREEN_WIDTH, 15):
+        surf.blit(dirt, (x, SCREEN_HEIGHT-1.3 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 1.1 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 0.9 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 0.7 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 0.5 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 0.3 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT - 0.1 * TILE_SIZE))
+        surf.blit(dirt, (x, SCREEN_HEIGHT))
 
     #draw text
     custom_font = pygame.font.Font("../assets/fonts/font.ttf", 48)
-    text = custom_font.render("Coin Capture", True, (255, 0, 0))
+    text = custom_font.render("Coin Capture", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
 
 #placeholder for functions that add coins and other loot

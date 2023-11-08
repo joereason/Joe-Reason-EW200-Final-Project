@@ -4,6 +4,7 @@ import sys
 
 from game_parameters import *
 from background import draw_background
+from lumberjack import Lumberjack
 
 #initialize pygame
 pygame.init()
@@ -19,13 +20,30 @@ running = True
 background = screen.copy()
 draw_background(background)
 
+lumberjack = Lumberjack(SCREEN_WIDTH/2, SCREEN_HEIGHT- 2.2*TILE_SIZE)
+
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
+        #controls the player with keyboard
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                lumberjack.move_left()
+            if event.key == pygame.K_RIGHT:
+                lumberjack.move_right()
+
+        #stops player when key is lifted
+        if event.type == pygame.KEYUP:
+            lumberjack.stop()
+
     #draw background:
     screen.blit(background, (0,0))
+
+    lumberjack.update()
+
+    lumberjack.draw(screen)
 
     # update the display
     pygame.display.flip()
