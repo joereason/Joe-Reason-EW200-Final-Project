@@ -20,7 +20,8 @@ running = True
 background = screen.copy()
 draw_background(background)
 
-lumberjack = Lumberjack(SCREEN_WIDTH/2, SCREEN_HEIGHT- 2.2*TILE_SIZE)
+#spawn lumberjack
+lumberjack = Lumberjack(SCREEN_WIDTH/2, SCREEN_HEIGHT- 1.8*TILE_SIZE)
 
 while running:
     for event in pygame.event.get():

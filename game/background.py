@@ -41,7 +41,7 @@ def draw_background(surf):
 
     #draw text
     custom_font = pygame.font.Font("../assets/fonts/font.ttf", 48)
-    text = custom_font.render("Coin Capture", True, (0, 153, 0))
+    text = custom_font.render("Wood Chopper", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
 
 #placeholder for functions that add coins and other loot
