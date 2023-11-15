@@ -1,6 +1,7 @@
 import pygame
 from game_parameters import *
 import random
+from deer import Deer, deer
 
 def draw_background(surf):
     #load sprites for background
@@ -43,5 +44,10 @@ def draw_background(surf):
     custom_font = pygame.font.Font("../assets/fonts/font.ttf", 48)
     text = custom_font.render("Wood Chopper", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
+
+def add_deer(num_deer):
+    for x in range(num_deer):
+        deer.add(Deer(random.randint(SCREEN_WIDTH, SCREEN_WIDTH+60), (SCREEN_HEIGHT- 1.8*TILE_SIZE)))
+
 
 #placeholder for functions that add coins and other loot
