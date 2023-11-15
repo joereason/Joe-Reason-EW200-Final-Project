@@ -49,6 +49,8 @@ while running:
         lumberjack.x = SCREEN_WIDTH-30
     if lumberjack.x < -15:
         lumberjack.x = -15
+    if lumberjack.y > SCREEN_HEIGHT - 2.2*TILE_SIZE:
+        lumberjack.y = SCREEN_HEIGHT - 2.2*TILE_SIZE
 
     #draw background:
     screen.blit(background, (0,0))

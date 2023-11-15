@@ -22,8 +22,8 @@ class Lumberjack(pygame.sprite.Sprite):
         self.image = self.forward_image
 
     def jump(self):
-        while self.y <= 300:
-            self.y_speed = -PLAYER_SPEED
+        #placeholder for jump function
+
 
 
     def stop(self):
