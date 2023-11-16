@@ -1,9 +1,9 @@
 import pygame
 from game_parameters import *
 
-class Lumberjack(pygame.sprite.Sprite):
+class Robber(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        self.forward_image = pygame.image.load('../assets/sprites/lum.png')
+        self.forward_image = pygame.image.load('../assets/sprites/robber.png')
         self.image = self.forward_image
         self.reverse_image = pygame.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()
@@ -20,11 +20,6 @@ class Lumberjack(pygame.sprite.Sprite):
     def move_right(self):
         self.x_speed = PLAYER_SPEED
         self.image = self.forward_image
-
-    #def jump(self):
-        #placeholder for jump function
-
-
 
     def stop(self):
         self.x_speed = 0

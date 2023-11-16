@@ -2,6 +2,7 @@ import pygame
 from game_parameters import *
 import random
 from deer import Deer, deer
+from wood import Wood, wood
 
 def draw_background(surf):
     #load sprites for background
@@ -47,7 +48,11 @@ def draw_background(surf):
 
 def add_deer(num_deer):
     for x in range(num_deer):
-        deer.add(Deer(random.randint(SCREEN_WIDTH, SCREEN_WIDTH+60), (SCREEN_HEIGHT- 1.8*TILE_SIZE)))
+        deer.add(Deer(random.randint(SCREEN_WIDTH, SCREEN_WIDTH+5000), (SCREEN_HEIGHT- 1.8*TILE_SIZE)))
+
+def add_wood(num_wood):
+    for x in range(num_wood):
+        wood.add(Wood(random.randint(-1000, 0), (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
 
 
 #placeholder for functions that add coins and other loot
