@@ -43,7 +43,7 @@ def draw_background(surf):
 
     #draw text
     custom_font = pygame.font.Font("../assets/fonts/font.ttf", 48)
-    text = custom_font.render("Wood Chopper", True, (0, 153, 0))
+    text = custom_font.render("Wood Choppas", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
 
 def add_deer(num_deer):

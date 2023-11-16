@@ -35,6 +35,9 @@ lumscore = 0
 robscore = 0
 score_font = pygame.font.Font('../assets/fonts/scoreboard.ttf', 48)
 
+#initialize final screen font
+final_score_font = pygame.font.Font('../assets/fonts/scoreboard.ttf', 30)
+
 lumlives = NUM_LIVES1
 roblives = NUM_LIVES2
 
@@ -42,8 +45,8 @@ roblives = NUM_LIVES2
 lumberjack = Lumberjack(SCREEN_WIDTH/2+20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
 robber = Robber(SCREEN_WIDTH/2-20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
 
-while running:
-#while lumlives > 0 and roblives > 0:
+#while running:
+while lumlives > 0 and roblives > 0:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -65,9 +68,15 @@ while running:
 
         #stops player when key is lifted
         if event.type == pygame.KEYUP:
-            lumberjack.stop()
-            robber.stop()
-            #fix this
+            keys = pygame.key.get_pressed()
+            #prevents issue where both players stop when a key is lifted
+            if keys[pygame.K_a] or keys[pygame.K_d] or keys[pygame.K_w]:
+                lumberjack.stop()
+            elif keys[pygame.K_LEFT] or keys[pygame.K_RIGHT] or keys[pygame.K_UP]:
+                robber.stop()
+            else:
+                lumberjack.stop()
+                robber.stop()
 
     #define boarders at edge of screen
     if lumberjack.x > SCREEN_WIDTH-30:
@@ -148,5 +157,31 @@ while running:
     # limit the frame rate
     clock.tick(60)
 
-pygame.quit()
-sys.exit()
+#create new background when game over
+screen.blit(background, (0, 0))
+
+#show game over message
+message = score_font.render('GAME OVER', True, (0, 0, 0))
+screen.blit(message, (SCREEN_WIDTH / 2 - message.get_width() / 2, SCREEN_HEIGHT / 2-20))
+
+#show final score
+finalscore1 = final_score_font.render(f'Player 1 Score: {robscore}', True, (0, 0, 0))
+finalscore2 = final_score_font.render(f'Player 2 Score: {lumscore}', True, (0, 0, 0))
+screen.blit(finalscore1, (SCREEN_WIDTH / 4 - finalscore1.get_width() / 2, SCREEN_HEIGHT / 2 + finalscore1.get_height()))
+screen.blit(finalscore2, (SCREEN_WIDTH*3 / 4 - finalscore2.get_width() / 2, SCREEN_HEIGHT / 2 + finalscore2.get_height()))
+
+
+#update display
+pygame.display.flip()
+
+#wait for user to exit the game
+while True:
+    #This is where you would add 'play again' or add other levels
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            #Quit pygame
+            pygame.quit()
+            sys.exit()
+
+#pygame.quit()
+#sys.exit()
