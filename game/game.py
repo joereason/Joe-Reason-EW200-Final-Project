@@ -102,7 +102,7 @@ while lumlives > 0 and roblives > 0:
     wood.update()
     lumberjack.update()
     robber.update()
-    zombies.update(lumberjack)
+    zombies.update()
 
     #check for collisions
     lumresult = pygame.sprite.spritecollide(lumberjack, deer, True)
@@ -118,12 +118,12 @@ while lumlives > 0 and roblives > 0:
     lumberjack_zombie = pygame.sprite.spritecollide(lumberjack, zombies, True)
     if lumberjack_zombie:
         lumlives -= len(lumberjack_zombie)
-        add_zombies(len(lumberjack_zombie)**2)
+        add_zombies(len(lumberjack_zombie))
 
     robber_zombie = pygame.sprite.spritecollide(robber, zombies, True)
     if robber_zombie:
         roblives -= len(robber_zombie)
-        add_zombies(len(robber_zombie)**2)
+        add_zombies(len(robber_zombie))
 
     #increase score
     points1 = pygame.sprite.spritecollide(lumberjack, wood, True)
