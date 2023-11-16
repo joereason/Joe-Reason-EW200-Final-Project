@@ -3,11 +3,12 @@ import random
 import sys
 
 from game_parameters import *
-from background import draw_background, add_deer, add_wood
+from background import draw_background, add_deer, add_wood, add_zombies
 from lumberjack import Lumberjack
 from robber import Robber
 from deer import deer
 from wood import wood
+from zombie import zombies
 
 #initialize pygame
 pygame.init()
@@ -25,6 +26,7 @@ draw_background(background)
 
 add_deer(2)
 add_wood(4)
+add_zombies(1)
 
 life_icon = pygame.image.load('../assets/sprites/heart.png').convert()
 life_icon = pygame.transform.scale_by(life_icon, 0.2)
@@ -100,6 +102,7 @@ while lumlives > 0 and roblives > 0:
     wood.update()
     lumberjack.update()
     robber.update()
+    zombies.update(lumberjack)
 
     #check for collisions
     lumresult = pygame.sprite.spritecollide(lumberjack, deer, True)
@@ -111,6 +114,16 @@ while lumlives > 0 and roblives > 0:
     if robresult:
         roblives -= len(robresult)
         add_deer(len(robresult))
+
+    lumberjack_zombie = pygame.sprite.spritecollide(lumberjack, zombies, True)
+    if lumberjack_zombie:
+        lumlives -= len(lumberjack_zombie)
+        add_zombies(len(lumberjack_zombie)**2)
+
+    robber_zombie = pygame.sprite.spritecollide(robber, zombies, True)
+    if robber_zombie:
+        roblives -= len(robber_zombie)
+        add_zombies(len(robber_zombie)**2)
 
     #increase score
     points1 = pygame.sprite.spritecollide(lumberjack, wood, True)
@@ -136,6 +149,7 @@ while lumlives > 0 and roblives > 0:
     wood.draw(screen)
     lumberjack.draw(screen)
     robber.draw(screen)
+    zombies.draw(screen)
 
     #draw the score on the score
     text1 = score_font.render(f"{lumscore}", True, (0, 180, 100))

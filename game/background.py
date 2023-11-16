@@ -3,6 +3,7 @@ from game_parameters import *
 import random
 from deer import Deer, deer
 from wood import Wood, wood
+from zombie import Zombie, zombies
 
 def draw_background(surf):
     #load sprites for background
@@ -54,5 +55,12 @@ def add_wood(num_wood):
     for x in range(num_wood):
         wood.add(Wood(random.randint(-1000, 0), (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
 
+def add_zombies(num_zombie):
+    for x in range(num_zombie):
+        i = random.randint(0, 2)
+        if i == 0:
+            zombies.add(Zombie(0, (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
+        if i == 1:
+            zombies.add(Zombie(0, (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
 
 #placeholder for functions that add coins and other loot
