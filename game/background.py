@@ -3,7 +3,6 @@ from game_parameters import *
 import random
 from deer import Deer, deer
 from wood import Wood, wood
-from zombie import Zombie, zombies
 import lumberjack
 import robber
 
@@ -46,7 +45,7 @@ def draw_background(surf):
 
     #draw text
     custom_font = pygame.font.Font("../assets/fonts/font.ttf", 48)
-    text = custom_font.render("Wood Choppas Apocalypse", True, (0, 153, 0))
+    text = custom_font.render("Wood Choppers", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
 
 def add_deer(num_deer):
@@ -57,11 +56,5 @@ def add_wood(num_wood):
     for x in range(num_wood):
         wood.add(Wood(random.randint(-1000, 0), (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
 
-def add_zombies(num_zombies):
-    for x in range(num_zombies):
-        zombie1 = Zombie(-10, SCREEN_HEIGHT - 1.6 * TILE_SIZE, robber)
-        zombie2 = Zombie(SCREEN_WIDTH+10, SCREEN_HEIGHT - 1.6 * TILE_SIZE, lumberjack)
-        zombies.add(zombie1)
-        zombies.add(zombie2)
 
 #placeholder for functions that add coins and other loot
