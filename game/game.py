@@ -8,6 +8,7 @@ from lumberjack import Lumberjack
 from robber import Robber
 from deer import deer
 from wood import wood
+from raven import Raven
 
 #initialize pygame
 pygame.init()
@@ -44,6 +45,7 @@ roblives = NUM_LIVES2
 #spawn lumberjack
 lumberjack = Lumberjack(SCREEN_WIDTH/2+20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
 robber = Robber(SCREEN_WIDTH/2-20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
+raven = Raven(SCREEN_WIDTH/2, 100)
 
 #while running:
 while lumlives > 0 and roblives > 0:
@@ -100,6 +102,7 @@ while lumlives > 0 and roblives > 0:
     wood.update()
     lumberjack.update()
     robber.update()
+    raven.hover()
 
     #check for collisions
     lumresult = pygame.sprite.spritecollide(lumberjack, deer, True)
@@ -136,6 +139,7 @@ while lumlives > 0 and roblives > 0:
     wood.draw(screen)
     lumberjack.draw(screen)
     robber.draw(screen)
+    raven.draw(screen)
 
     #draw the score on the score
     text1 = score_font.render(f"{lumscore}", True, (0, 180, 100))
