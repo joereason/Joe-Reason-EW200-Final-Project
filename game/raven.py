@@ -5,7 +5,7 @@ from game_parameters import *
 class Raven(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        self.forward_image = pygame.image.load('../assets/sprites/idleraven.png')
+        self.forward_image = pygame.image.load('../assets/sprites/raven.png')
         self.image = self.forward_image
         self.reverse_image = pygame.transform.flip(self.image, True, False)
         self.rect = self.image.get_rect()
@@ -21,6 +21,12 @@ class Raven(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.rect.x = self.x
 
+    def update(self):
+        self.x += self.x_speed
+        self.y += self.y_speed
+        self.rect.x = self.x
+        self.rect.y = self.y
+
     def hover(self):
         self.rect.x = self.x
         self.rect.y = self.y
@@ -33,20 +39,10 @@ class Raven(pygame.sprite.Sprite):
                 self.image = self.reverse_image
 
     def swoop(self):
-        num = random.randint(1, 2)
-        if num == 1:
-            self.x_speed = 0.5
-            while self.y <= SCREEN_WIDTH - 2.2*TILE_SIZE:
-                self.y_speed += 2
-        else:
-            self.x_speed = -0.5
-            while self.y <= SCREEN_WIDTH - 2.2*TILE_SIZE:
-                self.y_speed += 2
+        self.y_speed += 2
 
     def fly_up(self):
-        self.x_speed = 0
-        while self.y > 100:
-            self.y_speed -= 2
+        self.y_speed -= 2
 
     def draw(self, surf):
         surf.blit(self.image, self.rect)

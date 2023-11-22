@@ -59,9 +59,9 @@ while lumlives > 0 and roblives > 0:
                 lumberjack.move_left()
             if event.key == pygame.K_RIGHT:
                 lumberjack.move_right()
-            if event.key == pygame.K_UP:
-                lumberjack.jump()
-                lumberjack.fall()
+            #if event.key == pygame.K_UP:
+            #    lumberjack.jump()
+            #    lumberjack.fall()
 
             #control player 2
             if event.key == pygame.K_a:
@@ -115,9 +115,6 @@ while lumlives > 0 and roblives > 0:
     if robresult:
         roblives -= len(robresult)
         add_deer(len(robresult))
-        raven.swoop()
-        raven.fly_up()
-        raven.hover()
 
     #increase score
     points1 = pygame.sprite.spritecollide(lumberjack, wood, True)
