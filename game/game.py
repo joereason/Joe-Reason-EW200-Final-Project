@@ -3,12 +3,13 @@ import random
 import sys
 
 from game_parameters import *
-from background import draw_background, add_deer, add_wood
+from background import draw_background, add_deer, add_wood, add_hearts
 from lumberjack import Lumberjack
 from robber import Robber
 from deer import deer
 from wood import wood
 from raven import Raven
+from heart import hearts
 
 #initialize pygame
 pygame.init()
@@ -59,9 +60,8 @@ while lumlives > 0 and roblives > 0:
                 lumberjack.move_left()
             if event.key == pygame.K_RIGHT:
                 lumberjack.move_right()
-            #if event.key == pygame.K_UP:
-            #    lumberjack.jump()
-            #    lumberjack.fall()
+            if event.key == pygame.K_UP:
+                lumberjack.isjumping = True
 
             #control player 2
             if event.key == pygame.K_a:
@@ -99,6 +99,7 @@ while lumlives > 0 and roblives > 0:
     #draw background:
     screen.blit(background, (0,0))
 
+    lumberjack.jump()
     deer.update()
     wood.update()
     lumberjack.update()
@@ -106,28 +107,29 @@ while lumlives > 0 and roblives > 0:
     raven.hover()
 
     #check for collisions
-    lumresult = pygame.sprite.spritecollide(lumberjack, deer, True)
-    if lumresult:
-        lumlives -= len(lumresult)
-        add_deer(len(lumresult))
+    lumdeercollide = pygame.sprite.spritecollide(lumberjack, deer, True)
+    if lumdeercollide:
+        lumlives -= len(lumdeercollide)
+        add_deer(len(lumdeercollide))
+        add_hearts(len(lumdeercollide))
 
-    robresult = pygame.sprite.spritecollide(robber, deer, True)
-    if robresult:
-        roblives -= len(robresult)
-        add_deer(len(robresult))
+    robdeercollide = pygame.sprite.spritecollide(robber, deer, True)
+    if robdeercollide:
+        roblives -= len(robdeercollide)
+        add_deer(len(robdeercollide))
+        add_hearts(len(robdeercollide))
 
     #increase score
-    points1 = pygame.sprite.spritecollide(lumberjack, wood, True)
-    if points1:
+    lumwoodcollide = pygame.sprite.spritecollide(lumberjack, wood, True)
+    if lumwoodcollide:
         #this is where I add sounds
-        lumscore += len(points1)
+        lumscore += len(lumwoodcollide)
         add_wood(1)
-    points1 = pygame.sprite.spritecollide(lumberjack, wood, True)
 
-    points2 = pygame.sprite.spritecollide(robber, wood, True)
-    if points2:
+    robwoodcollide = pygame.sprite.spritecollide(robber, wood, True)
+    if robwoodcollide:
         # this is where I add sounds
-        robscore += len(points2)
+        robscore += len(robwoodcollide)
         add_wood(1)
 
     for d in deer:
@@ -142,7 +144,7 @@ while lumlives > 0 and roblives > 0:
     robber.draw(screen)
     raven.draw(screen)
 
-    #draw the score on the score
+    #draw the score on the screen
     text1 = score_font.render(f"{lumscore}", True, (0, 180, 100))
     text2 = score_font.render(f"{robscore}", True, (0, 180, 100))
 

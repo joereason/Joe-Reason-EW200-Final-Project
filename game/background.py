@@ -3,6 +3,7 @@ from game_parameters import *
 import random
 from deer import Deer, deer
 from wood import Wood, wood
+from heart import Heart, hearts
 import lumberjack
 import robber
 
@@ -55,5 +56,9 @@ def add_deer(num_deer):
 def add_wood(num_wood):
     for x in range(num_wood):
         wood.add(Wood(random.randint(-1000, 0), (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
+
+def add_hearts(num_hearts):
+    for x in range(num_hearts):
+        hearts.add(Heart(random.randint(-5, 0), (SCREEN_HEIGHT - 1.6 * TILE_SIZE)))
 
 #placeholder for functions that add coins and other loot
