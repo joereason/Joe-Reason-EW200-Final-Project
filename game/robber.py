@@ -12,6 +12,8 @@ class Robber(pygame.sprite.Sprite):
         self.rect.center = (x, y)
         self.x_speed = 0
         self.y_speed = 0
+        self.isjumping = False
+        self.velocity = 10
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED
@@ -24,6 +26,18 @@ class Robber(pygame.sprite.Sprite):
     def stop(self):
         self.x_speed = 0
         self.y_speed = 0
+
+    def jump(self):
+        if self.isjumping:
+            if self.velocity >= -10:
+                dir = 1
+                if self.velocity < 0:
+                    dir = -1
+                self.y -= self.velocity**2 * 0.5 * dir
+                self.velocity -= 0.5
+            else:
+                self.isjumping = False
+                self.velocity = 10
 
     def update(self):
         self.x += self.x_speed

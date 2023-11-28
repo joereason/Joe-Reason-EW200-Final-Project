@@ -13,7 +13,7 @@ class Lumberjack(pygame.sprite.Sprite):
         self.x_speed = 0
         self.y_speed = 0
         self.isjumping = False
-        self.acceleration = 10
+        self.velocity = 10
 
     def move_left(self):
         self.x_speed = -1 * PLAYER_SPEED
@@ -29,15 +29,15 @@ class Lumberjack(pygame.sprite.Sprite):
 
     def jump(self):
         if self.isjumping:
-            if self.acceleration >= -10:
+            if self.velocity >= -10:
                 dir = 1
-                if self.acceleration < 0:
+                if self.velocity < 0:
                     dir = -1
-                self.y -= self.acceleration**2 * 0.1 * dir
-                self.acceleration -= 1
+                self.y -= self.velocity**2 * 0.5 * dir
+                self.velocity -= 0.5
             else:
                 self.isjumping = False
-                self.acceleration = 10
+                self.velocity = 10
 
     def update(self):
         self.x += self.x_speed

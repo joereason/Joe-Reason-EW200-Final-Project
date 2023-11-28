@@ -3,13 +3,12 @@ import random
 import sys
 
 from game_parameters import *
-from background import draw_background, add_deer, add_wood, add_hearts
+from background import draw_background, add_deer, add_wood
 from lumberjack import Lumberjack
 from robber import Robber
 from deer import deer
 from wood import wood
 from raven import Raven
-from heart import hearts
 
 #initialize pygame
 pygame.init()
@@ -68,6 +67,8 @@ while lumlives > 0 and roblives > 0:
                 robber.move_left()
             if event.key == pygame.K_d:
                 robber.move_right()
+            if event.key == pygame.K_w:
+                robber.isjumping = True
 
         #stops player when key is lifted
         if event.type == pygame.KEYUP:
@@ -100,6 +101,7 @@ while lumlives > 0 and roblives > 0:
     screen.blit(background, (0,0))
 
     lumberjack.jump()
+    robber.jump()
     deer.update()
     wood.update()
     lumberjack.update()
@@ -111,13 +113,11 @@ while lumlives > 0 and roblives > 0:
     if lumdeercollide:
         lumlives -= len(lumdeercollide)
         add_deer(len(lumdeercollide))
-        add_hearts(len(lumdeercollide))
 
     robdeercollide = pygame.sprite.spritecollide(robber, deer, True)
     if robdeercollide:
         roblives -= len(robdeercollide)
         add_deer(len(robdeercollide))
-        add_hearts(len(robdeercollide))
 
     #increase score
     lumwoodcollide = pygame.sprite.spritecollide(lumberjack, wood, True)

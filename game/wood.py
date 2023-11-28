@@ -11,7 +11,7 @@ class Wood(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        self.speed = 1.0
+        self.speed = -1.0
         self.rect.center = (x, y)
 
     def update(self):
