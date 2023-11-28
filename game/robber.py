@@ -39,6 +39,10 @@ class Robber(pygame.sprite.Sprite):
                 self.isjumping = False
                 self.velocity = 10
 
+    def injured(self):
+        self.forward_image = pygame.image.load('../assets/sprites/hurtrobber.png')
+        self.reverse_image = pygame.transform.flip(self.forward_image, True, False)
+
     def update(self):
         self.x += self.x_speed
         self.y += self.y_speed
