@@ -6,11 +6,12 @@ class Food(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load('../assets/sprites/food.png').convert()
+        self.image = pygame.transform.scale_by(self.image, 0.06)
         self.image.set_colorkey((255, 255, 255))
         self.rect = self.image.get_rect()
         self.x = x
         self.y = y
-        self.speed = 5.0
+        self.speed = 1.0
         self.rect.center = (x, y)
 
     def update(self):

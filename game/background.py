@@ -59,6 +59,6 @@ def add_wood(num_wood):
 
 def add_food(num_food):
     for x in range(num_food):
-        wood.add(Wood(random.randint(-50, 0), (SCREEN_HEIGHT/2)))
+        food.add(Food(random.randint(-500, 0), (SCREEN_HEIGHT - 1.8 * TILE_SIZE)))
 
 #placeholder for functions that add coins and other loot

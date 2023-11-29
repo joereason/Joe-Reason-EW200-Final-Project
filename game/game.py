@@ -27,7 +27,6 @@ draw_background(background)
 
 add_deer(2)
 add_wood(4)
-add_food(2)
 
 life_icon = pygame.image.load('../assets/sprites/heart.png').convert()
 life_icon = pygame.transform.scale_by(life_icon, 0.2)
@@ -145,6 +144,24 @@ while lumlives > 0 and roblives > 0:
         # this is where I add sounds
         robscore += len(robwoodcollide)
         add_wood(1)
+
+#add lives for food collision
+    #increase score
+    lumfoodcollide = pygame.sprite.spritecollide(lumberjack, food, True)
+    if lumfoodcollide:
+        #this is where I add sounds
+        if lumlives < 3:
+            lumlives += 1
+            lumberjack.forward_image = pygame.image.load('../assets/sprites/lum.png')
+            lumberjack.reverse_image = pygame.transform.flip(lumberjack.forward_image, True, False)
+
+    robfoodcollide = pygame.sprite.spritecollide(robber, food, True)
+    if robfoodcollide:
+        # this is where I add sounds
+        if roblives < 3:
+            roblives += 1
+            robber.forward_image = pygame.image.load('../assets/sprites/robber.png')
+            robber.reverse_image = pygame.transform.flip(robber.forward_image, True, False)
 
     for d in deer:
         if d.rect.x < -d.rect.width:  # use the tile size
