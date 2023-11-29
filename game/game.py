@@ -3,12 +3,13 @@ import random
 import sys
 
 from game_parameters import *
-from background import draw_background, add_deer, add_wood
+from background import draw_background, add_deer, add_wood, add_food
 from lumberjack import Lumberjack
 from robber import Robber
 from deer import deer
 from wood import wood
 from raven import Raven
+from food import food
 
 #initialize pygame
 pygame.init()
@@ -26,6 +27,7 @@ draw_background(background)
 
 add_deer(2)
 add_wood(4)
+add_food(2)
 
 life_icon = pygame.image.load('../assets/sprites/heart.png').convert()
 life_icon = pygame.transform.scale_by(life_icon, 0.2)
@@ -104,6 +106,7 @@ while lumlives > 0 and roblives > 0:
     robber.jump()
     deer.update()
     wood.update()
+    food.update()
     lumberjack.update()
     robber.update()
     raven.hover()
@@ -122,11 +125,13 @@ while lumlives > 0 and roblives > 0:
     if lumdeercollide:
         lumlives -= len(lumdeercollide)
         add_deer(len(lumdeercollide))
+        add_food(len(lumdeercollide))
 
     robdeercollide = pygame.sprite.spritecollide(robber, deer, True)
     if robdeercollide:
         roblives -= len(robdeercollide)
         add_deer(len(robdeercollide))
+        add_food(len(robdeercollide))
 
     #increase score
     lumwoodcollide = pygame.sprite.spritecollide(lumberjack, wood, True)
@@ -147,6 +152,7 @@ while lumlives > 0 and roblives > 0:
             add_deer(1)
 
     #draw the game objects
+    food.draw(screen)
     deer.draw(screen)
     wood.draw(screen)
     lumberjack.draw(screen)
