@@ -108,6 +108,15 @@ while lumlives > 0 and roblives > 0:
     robber.update()
     raven.hover()
 
+    #change to hurt image when at 1 life left
+    if lumlives <= 1:
+        lumberjack.forward_image = pygame.image.load('../assets/sprites/hurtlum.png')
+        lumberjack.reverse_image = pygame.transform.flip(lumberjack.forward_image, True, False)
+
+    if roblives <= 1:
+        robber.forward_image = pygame.image.load('../assets/sprites/hurtrobber.png')
+        robber.reverse_image = pygame.transform.flip(robber.forward_image, True, False)
+
     #check for collisions
     lumdeercollide = pygame.sprite.spritecollide(lumberjack, deer, True)
     if lumdeercollide:
