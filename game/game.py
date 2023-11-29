@@ -28,6 +28,13 @@ draw_background(background)
 add_deer(2)
 add_wood(4)
 
+#load the sound effects
+lumhurt = pygame.mixer.Sound("../assets/sounds/lumoof.wav")
+robhurt = pygame.mixer.Sound('../assets/sounds/robberoof.wav')
+eating = pygame.mixer.Sound('../assets/sounds/eating.wav')
+point = pygame.mixer.Sound('../assets/sounds/point.wav')
+jump = pygame.mixer.Sound('../assets/sounds/jump.wav')
+
 life_icon = pygame.image.load('../assets/sprites/heart.png').convert()
 life_icon = pygame.transform.scale_by(life_icon, 0.2)
 life_icon.set_colorkey((0, 0, 0))
@@ -62,6 +69,7 @@ while lumlives > 0 and roblives > 0:
                 lumberjack.move_right()
             if event.key == pygame.K_UP:
                 lumberjack.isjumping = True
+                pygame.mixer.Sound.play(jump)
 
             #control player 2
             if event.key == pygame.K_a:
@@ -70,6 +78,7 @@ while lumlives > 0 and roblives > 0:
                 robber.move_right()
             if event.key == pygame.K_w:
                 robber.isjumping = True
+                pygame.mixer.Sound.play(jump)
 
         #stops player when key is lifted
         if event.type == pygame.KEYUP:
@@ -125,12 +134,14 @@ while lumlives > 0 and roblives > 0:
         lumlives -= len(lumdeercollide)
         add_deer(len(lumdeercollide))
         add_food(len(lumdeercollide))
+        pygame.mixer.Sound.play(lumhurt)
 
     robdeercollide = pygame.sprite.spritecollide(robber, deer, True)
     if robdeercollide:
         roblives -= len(robdeercollide)
         add_deer(len(robdeercollide))
         add_food(len(robdeercollide))
+        pygame.mixer.Sound.play(robhurt)
 
     #increase score
     lumwoodcollide = pygame.sprite.spritecollide(lumberjack, wood, True)
@@ -138,12 +149,14 @@ while lumlives > 0 and roblives > 0:
         #this is where I add sounds
         lumscore += len(lumwoodcollide)
         add_wood(1)
+        pygame.mixer.Sound.play(point)
 
     robwoodcollide = pygame.sprite.spritecollide(robber, wood, True)
     if robwoodcollide:
         # this is where I add sounds
         robscore += len(robwoodcollide)
         add_wood(1)
+        pygame.mixer.Sound.play(point)
 
 #add lives for food collision
     #increase score
@@ -154,6 +167,7 @@ while lumlives > 0 and roblives > 0:
             lumlives += 1
             lumberjack.forward_image = pygame.image.load('../assets/sprites/lum.png')
             lumberjack.reverse_image = pygame.transform.flip(lumberjack.forward_image, True, False)
+            pygame.mixer.Sound.play(eating)
 
     robfoodcollide = pygame.sprite.spritecollide(robber, food, True)
     if robfoodcollide:
@@ -162,6 +176,7 @@ while lumlives > 0 and roblives > 0:
             roblives += 1
             robber.forward_image = pygame.image.load('../assets/sprites/robber.png')
             robber.reverse_image = pygame.transform.flip(robber.forward_image, True, False)
+            pygame.mixer.Sound.play(eating)
 
     for d in deer:
         if d.rect.x < -d.rect.width:  # use the tile size
