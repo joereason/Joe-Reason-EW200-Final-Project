@@ -38,11 +38,5 @@ class Raven(pygame.sprite.Sprite):
             else:
                 self.image = self.reverse_image
 
-    def swoop(self):
-        self.y_speed += 2
-
-    def fly_up(self):
-        self.y_speed -= 2
-
     def draw(self, surf):
         surf.blit(self.image, self.rect)
