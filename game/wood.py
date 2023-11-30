@@ -1,6 +1,4 @@
 import pygame
-import random
-from game_parameters import *
 
 class Wood(pygame.sprite.Sprite):
     def __init__(self, x, y):

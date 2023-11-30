@@ -4,8 +4,6 @@ import random
 from deer import Deer, deer
 from wood import Wood, wood
 from food import Food, food
-import lumberjack
-import robber
 
 def draw_background(surf):
     #load sprites for background
@@ -49,6 +47,7 @@ def draw_background(surf):
     text = custom_font.render("Wood Choppers", True, (0, 153, 0))
     surf.blit(text, (SCREEN_WIDTH/2 - text.get_width()/2, 0))
 
+#methods for adding game objects
 def add_deer(num_deer):
     for x in range(num_deer):
         deer.add(Deer(random.randint(SCREEN_WIDTH, SCREEN_WIDTH+5000), (SCREEN_HEIGHT- 1.8*TILE_SIZE)))
@@ -60,5 +59,3 @@ def add_wood(num_wood):
 def add_food(num_food):
     for x in range(num_food):
         food.add(Food(random.randint(-500, 0), (SCREEN_HEIGHT - 1.8 * TILE_SIZE)))
-
-#placeholder for functions that add coins and other loot

@@ -1,5 +1,4 @@
 import pygame
-import random
 from game_parameters import *
 
 class Raven(pygame.sprite.Sprite):
