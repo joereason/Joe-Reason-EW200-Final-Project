@@ -25,6 +25,7 @@ running = True
 background = screen.copy()
 draw_background(background)
 
+#add initial deer and wood objects
 add_deer(2)
 add_wood(4)
 
@@ -35,6 +36,7 @@ eating = pygame.mixer.Sound('../assets/sounds/eating.wav')
 point = pygame.mixer.Sound('../assets/sounds/point.wav')
 jump = pygame.mixer.Sound('../assets/sounds/jump.wav')
 
+#create life icon
 life_icon = pygame.image.load('../assets/sprites/heart.png').convert()
 life_icon = pygame.transform.scale_by(life_icon, 0.2)
 life_icon.set_colorkey((0, 0, 0))
@@ -47,10 +49,11 @@ score_font = pygame.font.Font('../assets/fonts/scoreboard.ttf', 48)
 #initialize final screen font
 final_score_font = pygame.font.Font('../assets/fonts/scoreboard.ttf', 30)
 
+#initialize initial life count
 lumlives = NUM_LIVES1
 roblives = NUM_LIVES2
 
-#spawn lumberjack
+#spawn characters
 lumberjack = Lumberjack(SCREEN_WIDTH/2+20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
 robber = Robber(SCREEN_WIDTH/2-20, SCREEN_HEIGHT- 2.2*TILE_SIZE)
 raven = Raven(SCREEN_WIDTH/2, 100)
@@ -92,7 +95,7 @@ while lumlives > 0 and roblives > 0:
                 lumberjack.stop()
                 robber.stop()
 
-    #define boarders at edge of screen
+    #define boarders at edge of screen for both characters
     if lumberjack.x > SCREEN_WIDTH-30:
         lumberjack.x = SCREEN_WIDTH-30
     if lumberjack.x < -15:
@@ -110,6 +113,7 @@ while lumlives > 0 and roblives > 0:
     #draw background:
     screen.blit(background, (0,0))
 
+    #update all characters and objectts
     lumberjack.jump()
     robber.jump()
     deer.update()
@@ -158,11 +162,9 @@ while lumlives > 0 and roblives > 0:
         add_wood(1)
         pygame.mixer.Sound.play(point)
 
-#add lives for food collision
-    #increase score
+    #add lives for food collision
     lumfoodcollide = pygame.sprite.spritecollide(lumberjack, food, True)
     if lumfoodcollide:
-        #this is where I add sounds
         if lumlives < 3:
             lumlives += 1
             lumberjack.forward_image = pygame.image.load('../assets/sprites/lum.png')
@@ -178,6 +180,7 @@ while lumlives > 0 and roblives > 0:
             robber.reverse_image = pygame.transform.flip(robber.forward_image, True, False)
             pygame.mixer.Sound.play(eating)
 
+    #add more deer when they leave the screen
     for d in deer:
         if d.rect.x < -d.rect.width:  # use the tile size
             deer.remove(d)  # remove the fish from the sprite group
@@ -198,7 +201,7 @@ while lumlives > 0 and roblives > 0:
     screen.blit(text1, (SCREEN_WIDTH-2*TILE_SIZE, 30))
     screen.blit(text2, (2*TILE_SIZE, 30))
 
-#draw both lives
+    #draw both lives
     for life in range(lumlives):
         screen.blit(life_icon, (((SCREEN_WIDTH-50)-life*TILE_SIZE), (SCREEN_HEIGHT - 1.4*TILE_SIZE)))
 
