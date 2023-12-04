@@ -8,3 +8,4 @@ When one player dies, it's game over.
 Controls:
   Player 1: Up (jump), Left (move left), Right (move right)
   Player 2: W (jump), A (move left), D (move right)
+(Jacob Hernandez helped with my readme)
